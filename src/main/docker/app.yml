@@ -1,0 +1,15 @@
+version: '2'
+services:
+    entityservice-app:
+        image: entityservice
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_COUCHBASE_BOOTSTRAP_HOSTS=entityservice-couchbase
+            - SPRING_COUCHBASE_BUCKET_NAME=entityservice
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    entityservice-couchbase:
+        extends:
+            file: couchbase.yml
+            service: entityservice-couchbase
